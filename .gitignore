@@ -1,0 +1,13 @@
+.DS_STORE
+node_modules
+__pycache__
+test/results/*.xml
+*~
+*.pyc
+coverage/
+.module-cache
+*.log*
+.vscode
+.env*
+dist/
+node_modules/

@@ -1,0 +1,30 @@
+name: DAG Validation
+on:
+  push:
+    paths:
+      - 'dags/**'
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  linting:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Lint DAGs with Flake8
+        uses: actions/dag-validation-action@main # todo: replace w/ customer repo
+        with:
+          flake8: true
+          dags: 'code/dags' # default: `dags`
+      - name: Check code compliance with Black
+        uses: actions/dag-validation-action@main
+        with:
+          black: true
+  testing:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test DAGs with PyTest
+        uses: actions/dag-validation-action@main
+        with:
+          pytest: true
+          testdir: 'code/tests' # default: `tests`

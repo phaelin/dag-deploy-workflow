@@ -1,0 +1,20 @@
+name: Deployment
+on:
+  workflow_run:
+    workflows:
+      - 'DAG Validation'
+    types:
+      - completed
+  pull_request:
+    types:
+      - closed
+jobs:
+  DeploymentMatrix:
+    strategy:
+      matrix:
+        deploy-env: [dev, test, prod]
+    uses: ./.github/workflows/deployment.yml
+    with:
+      deploy-env: ${{ matrix.deploy-env }}
+      region: 'us-east-1'
+      dest-s3-bucket-path: ${{ matrix.deploy-env }}

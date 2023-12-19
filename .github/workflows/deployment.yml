@@ -1,0 +1,50 @@
+name: Deploy DAGs
+on:
+  workflow_call:
+    inputs:
+      deploy-env:
+        required: true
+        type: string
+      region:
+        required: true
+        type: string
+        default: us-east-1
+      dest-s3-bucket-path:
+        required: true
+        type: string
+    # secrets:
+    #   aws-access-key-id:
+    #     required: true
+    #   aws-secret-access-key:
+    #     required: true
+    #   dest-s3-bucket:
+    #     required: true
+
+jobs:
+  deployment: 
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.deploy-env }}
+    if: ${{ github.event.workflow_call.conclusion == 'success' }}
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+      - name: setup python 3.11
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade . botocore boto3 awscli
+
+      - name: Configure AWS Credentials
+        id: aws_creds
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ inputs.region }}
+
+      - name: Upload files to S3
+        run: aws s3 cp file s3://${{ secrets.S3_BUCKET }}/${{ inputs.dest-s3-bucket-path }}
+        
