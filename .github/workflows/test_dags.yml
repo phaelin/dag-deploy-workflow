@@ -24,6 +24,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Test DAGs with PyTest
-        uses: actions/dag-validation-action@main
+        uses: phaelin/dag-validation-action@main
         with:
           pytest: true
