@@ -22,16 +22,19 @@ default_args = {
 
 
 def print_hello():
-    return 'Hello World'
+    return "Hello World"
 
 
 with DAG(
-        dag_id=os.path.basename(__file__).replace(".py", ""),
-        default_args=default_args,
-        dagrun_timeout=timedelta(hours=2),
-        schedule_interval=None
+    dag_id=os.path.basename(__file__).replace(".py", ""),
+    default_args=default_args,
+    dagrun_timeout=timedelta(hours=2),
+    schedule_interval=None,
 ) as dag:
-
-    hello_operator = PythonOperator(task_id='hello_task', python_callable=print_hello, dag=dag)
-    hello_custom_operator = HelloOperator(task_id='hello_custom_task', my_field='Custom welcome to MWAA', dag=dag)
+    hello_operator = PythonOperator(
+        task_id="hello_task", python_callable=print_hello, dag=dag
+    )
+    hello_custom_operator = HelloOperator(
+        task_id="hello_custom_task", my_field="Custom welcome to MWAA", dag=dag
+    )
     hello_operator >> hello_custom_operator
