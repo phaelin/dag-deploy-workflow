@@ -3,6 +3,7 @@ on:
   push:
     paths:
       - 'dags/**'
+      - '.github/workflows'
   pull_request:
     branches:
       - main
@@ -15,7 +16,7 @@ jobs:
         uses: phaelin/dag-validation-action@main # todo: replace w/ customer repo
         with:
           flake8: true
-          dags: 'dags' # default: `dags`
+          dagsdir: 'dags' # default: `dags`
       - name: Check code compliance with Black
         uses: phaelin/dag-validation-action@main
         with:

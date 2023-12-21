@@ -1,5 +1,5 @@
-#Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
-#SPDX-License-Identifier: Apache-2.0
+# Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# SPDX-License-Identifier: Apache-2.0
 
 import os
 from airflow import DAG
@@ -20,8 +20,9 @@ default_args = {
     # 'end_date': datetime(2016, 1, 1),
 }
 
+
 def print_hello():
- return 'Hello World'
+    return 'Hello World'
 
 
 with DAG(
@@ -31,6 +32,6 @@ with DAG(
         schedule_interval=None
 ) as dag:
 
-    hello_operator=PythonOperator(task_id='hello_task', python_callable=print_hello, dag=dag)
-    hello_custom_operator = HelloOperator(task_id='hello_custom_task',my_field='Custom welcome to MWAA' , dag=dag)
+    hello_operator = PythonOperator(task_id='hello_task', python_callable=print_hello, dag=dag)
+    hello_custom_operator = HelloOperator(task_id='hello_custom_task', my_field='Custom welcome to MWAA', dag=dag)
     hello_operator >> hello_custom_operator
