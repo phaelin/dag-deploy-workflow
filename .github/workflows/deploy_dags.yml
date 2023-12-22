@@ -7,9 +7,9 @@ on:
       - completed
     branches:
       - main
-  # pull_request:
-  #   types:
-  #     - closed
+  pull_request:
+    types:
+      - closed
 jobs:
   Deployment:
     strategy:
