@@ -1,8 +1,5 @@
 name: Validate and Deploy DAGs
 on:
-  push:
-    branches:
-      - main
   pull_request:
     branches:
       - main
@@ -10,7 +7,7 @@ on:
       - closed
 jobs:
   Validation:
-    if: github.event_name != 'pull_request' || github.event.pull_request.merged == true
+    if: github.event.pull_request.merged == true
     uses: ./.github/workflows/validate.yml
   Deployment:
     needs:
