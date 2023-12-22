@@ -1,4 +1,4 @@
-name: Deploy DAGs
+name: Validate and Deploy DAGs
 on:
   push:
     branches:
