@@ -10,7 +10,8 @@ on:
       - closed
 jobs:
   Validation:
-    uses: ./.github/workflows/test_dags.yml
+    if: github.event_name != 'pull_request' || github.event.pull_request.merged == true
+    uses: ./.github/workflows/validate.yml
   Deployment:
     needs:
       - Validation
@@ -19,7 +20,7 @@ jobs:
         stage: [dev, test, prod]
       fail-fast: true
       max-parallel: 1
-    uses: ./.github/workflows/deployment.yml
+    uses: ./.github/workflows/deploy.yml
     with:
       stage: ${{ matrix.stage }}
       region: 'us-east-1'
