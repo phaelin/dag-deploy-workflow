@@ -14,7 +14,7 @@ jobs:
   Deployment:
     strategy:
       matrix:
-        deploy-env: [dev, test, prod]
+        deploy-env: [dev] # [dev, test, prod]
     uses: ./.github/workflows/deployment.yml
     with:
       deploy-env: ${{ matrix.deploy-env }}
