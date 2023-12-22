@@ -14,10 +14,12 @@ jobs:
   Deployment:
     strategy:
       matrix:
-        deploy-env: [dev] # [dev, test, prod]
+        stage: [dev, test, prod]
+      fail-fast: true
+      max-parallel: 1
     uses: ./.github/workflows/deployment.yml
     with:
-      deploy-env: ${{ matrix.deploy-env }}
+      stage: ${{ matrix.stage }}
       region: 'us-east-1'
-      dest-s3-bucket-path: ${{ matrix.deploy-env }}
+      dest-s3-bucket-path: ${{ matrix.stage }}
     secrets: inherit

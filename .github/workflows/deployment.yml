@@ -2,7 +2,7 @@ name: Deployment
 on:
   workflow_call:
     inputs:
-      deploy-env:
+      stage:
         required: true
         type: string
       region:
@@ -23,7 +23,7 @@ on:
 jobs:
   deployment: 
     runs-on: ubuntu-latest
-    environment: ${{ inputs.deploy-env }}
+    environment: ${{ inputs.stage }}
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       - name: Check out repository code
@@ -46,5 +46,6 @@ jobs:
           aws-region: ${{ inputs.region }}
 
       - name: Upload dag files to S3
-        run: aws s3 sync --delete dags s3://${{ secrets.S3_BUCKET }}/${{ inputs.dest-s3-bucket-path }}
+        run: |
+          aws s3 sync --delete . s3://${{ secrets.S3_BUCKET }}/${{ inputs.dest-s3-bucket-path }} --exclude "*" --include "dags/**"
         
