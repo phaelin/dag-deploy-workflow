@@ -7,9 +7,9 @@ on:
       - completed
     branches: 
       - main
-  pull_request:
-    types:
-      - closed
+  # pull_request:
+  #   types:
+  #     - closed
 jobs:
   Deployment:
     strategy:
@@ -17,6 +17,7 @@ jobs:
         stage: [dev, test, prod]
       fail-fast: true
       max-parallel: 1
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
     uses: ./.github/workflows/deployment.yml
     with:
       stage: ${{ matrix.stage }}
