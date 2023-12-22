@@ -3,7 +3,6 @@ on:
   push:
     paths:
       - 'dags/**'
-      - '.github/workflows/**'
   pull_request:
     branches:
       - main
@@ -19,10 +18,10 @@ jobs:
         shell: bash
         run: echo 'hello'
       - name: Lint DAGs with Flake8
-        uses: phaelin/dag-validation-action@main # todo: replace w/ customer repo
+        uses: phaelin/dag-validation-action@main
         with:
           flake8: true
-          dagsdir: 'dags' # default: `dags`
+          dagsdir: 'dags'
       - name: Check code compliance with Black
         uses: phaelin/dag-validation-action@main
         with:
