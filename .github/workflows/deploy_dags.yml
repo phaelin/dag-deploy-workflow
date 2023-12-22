@@ -20,4 +20,4 @@ jobs:
       deploy-env: ${{ matrix.deploy-env }}
       region: 'us-east-1'
       dest-s3-bucket-path: ${{ matrix.deploy-env }}
-      secrets: inherit
+    secrets: inherit
