@@ -10,7 +10,7 @@ on:
       - closed
 jobs:
   Validation:
-    uses: ./.github/workflows/test_dags.yml
+    uses: ./.github/workflows/validate.yml
   Deployment:
     needs:
       - Validation
@@ -19,7 +19,7 @@ jobs:
         stage: [dev, test, prod]
       fail-fast: true
       max-parallel: 1
-    uses: ./.github/workflows/deployment.yml
+    uses: ./.github/workflows/deploy.yml
     with:
       stage: ${{ matrix.stage }}
       region: 'us-east-1'
