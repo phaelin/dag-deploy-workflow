@@ -1,4 +1,4 @@
-name: DAG Validation
+name: Validation
 on:
   push:
     paths:
