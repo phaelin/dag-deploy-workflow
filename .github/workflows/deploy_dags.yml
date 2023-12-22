@@ -5,7 +5,7 @@ on:
       - Validation
     types: 
       - completed
-    branches: 
+    branches:
       - main
   # pull_request:
   #   types:
