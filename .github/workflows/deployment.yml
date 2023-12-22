@@ -1,4 +1,4 @@
-name: Deploy DAGs
+name: Deployment
 on:
   workflow_call:
     inputs:
@@ -35,7 +35,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          python -m pip install --upgrade . botocore boto3 awscli
+          python -m pip install --upgrade botocore boto3 awscli
 
       - name: Configure AWS Credentials
         id: aws_creds

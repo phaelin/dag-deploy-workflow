@@ -1,12 +1,15 @@
-name: Deployment
+name: Deploy DAGs
 on:
   workflow_run:
-    workflows: [Validation]
-    types: [completed]
-    branches: [main]
-  # pull_request:
-  #   types:
-  #     - closed
+    workflows: 
+      - Validation
+    types: 
+      - completed
+    branches: 
+      - main
+  pull_request:
+    types:
+      - closed
 jobs:
   Deployment:
     strategy:
