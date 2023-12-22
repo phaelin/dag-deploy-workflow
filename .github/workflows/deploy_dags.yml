@@ -1,23 +1,24 @@
 name: Deploy DAGs
 on:
-  workflow_run:
-    workflows: 
-      - Validation
-    types: 
-      - completed
+  push:
     branches:
       - main
-  # pull_request:
-  #   types:
-  #     - closed
+  pull_request:
+    branches:
+      - main
+    types:
+      - closed
 jobs:
+  Validation:
+    uses: ./.github/workflows/test_dags.yml
   Deployment:
+    needs:
+      - Validation
     strategy:
       matrix:
         stage: [dev, test, prod]
       fail-fast: true
       max-parallel: 1
-    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
     uses: ./.github/workflows/deployment.yml
     with:
       stage: ${{ matrix.stage }}

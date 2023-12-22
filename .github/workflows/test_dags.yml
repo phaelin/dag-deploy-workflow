@@ -1,5 +1,6 @@
 name: Validation
 on:
+  workflow_call:
   push:
     paths:
       - 'dags/**'
@@ -9,7 +10,6 @@ on:
     types:
       - opened
       - edited
-      - closed
 
 jobs:
   linting:
