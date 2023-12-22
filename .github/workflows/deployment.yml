@@ -24,7 +24,7 @@ jobs:
   deployment: 
     runs-on: ubuntu-latest
     environment: ${{ inputs.deploy-env }}
-    if: ${{ github.event.workflow_call.conclusion == 'success' }}
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
