@@ -45,6 +45,6 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ inputs.region }}
 
-      - name: Upload files to S3
-        run: aws s3 cp file s3://${{ secrets.S3_BUCKET }}/${{ inputs.dest-s3-bucket-path }}
+      - name: Upload dag files to S3
+        run: aws s3 sync --delete dags s3://${{ secrets.S3_BUCKET }}/${{ inputs.dest-s3-bucket-path }}
         
