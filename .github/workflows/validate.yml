@@ -2,13 +2,13 @@ name: Validation
 on:
   workflow_call:
   push:
+    branches:
+      - '!main'
     paths:
       - 'dags/**'
   pull_request:
     branches:
       - main
-    paths-ignore:
-      - 'dags/**'
     types:
       - opened
       - edited
