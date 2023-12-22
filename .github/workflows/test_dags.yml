@@ -18,19 +18,19 @@ jobs:
       - name: testing workflow
         shell: bash
         run: echo 'hello'
-      # - name: Lint DAGs with Flake8
-      #   uses: phaelin/dag-validation-action@main # todo: replace w/ customer repo
-      #   with:
-      #     flake8: true
-      #     dagsdir: 'dags' # default: `dags`
-      # - name: Check code compliance with Black
-      #   uses: phaelin/dag-validation-action@main
-      #   with:
-      #     black: true
-  # testing:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Test DAGs with PyTest
-  #       uses: phaelin/dag-validation-action@main
-  #       with:
-  #         pytest: true
+      - name: Lint DAGs with Flake8
+        uses: phaelin/dag-validation-action@main # todo: replace w/ customer repo
+        with:
+          flake8: true
+          dagsdir: 'dags' # default: `dags`
+      - name: Check code compliance with Black
+        uses: phaelin/dag-validation-action@main
+        with:
+          black: true
+  testing:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test DAGs with PyTest
+        uses: phaelin/dag-validation-action@main
+        with:
+          pytest: true
